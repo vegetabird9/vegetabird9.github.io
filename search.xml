@@ -42,31 +42,6 @@
     
     
     <entry>
-      <title>一些关于VMware的知识点</title>
-      <link href="/2023/09/12/aboutVMware/"/>
-      <url>/2023/09/12/aboutVMware/</url>
-      
-        <content type="html"><![CDATA[<p>VMware全名VMware Workstation，是一款基于x86的虚拟机软件，支持Windows、Mac OS X和Linux操作系统，支持虚拟机的创建、配置、管理和使用。<a href="https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html">VMware官网</a><br>另外一款在市场上份额较大的的是Oracle VM VirtualBox，他们使用的系统光盘映像文件不同，但是可以互相转换。<br>博主我主要使用的是VMware Workstation Pro 16这个版本，所以分享内容也以这个版本为主。</p><h2 id="关于VMware虚拟机的一些常见问题"><a href="#关于VMware虚拟机的一些常见问题" class="headerlink" title="关于VMware虚拟机的一些常见问题"></a>关于VMware虚拟机的一些常见问题</h2><h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><p><strong>问题描述</strong><br>在VMware虚拟机中安装Ubuntu系统，安装完后开机，提示没有权限打开VMware Authorization Service，提示权限不足。<br><strong>解决方法</strong><br>先本地计算机-管理-服务-找到同名的服务选项，手动启动一下，如果还是报错，就管理员权限打开VMware。</p><h2 id="关于重装或者删除VMware的一些坑"><a href="#关于重装或者删除VMware的一些坑" class="headerlink" title="关于重装或者删除VMware的一些坑"></a>关于重装或者删除VMware的一些坑</h2><p><strong>前置知识：</strong></p><ul><li>调出注册表：win+R调出面板，输入regedit</li><li>查看服务程序：</li></ul><ol><li>打开运行(win+R) 窗口, 输入命令services.msc，回车确定</li><li>右键点击桌面上的“此电脑”图标，在弹出菜单中选择“管理”菜单项，在打开的计算机管理窗口中，点击左侧边栏的“服务和应用程序&#x2F;服务”菜单项。</li></ol><ul><li>查看网络适配器：右键点击桌面上的“此电脑”图标，在弹出菜单中选择“管理”菜单项，在打开的计算机管理窗口中，点击“设备管理器”，可以看到网络适配器选项，再点击展开查看。</li></ul><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p><strong>首选方法</strong><br>Windows用户，直接在设置-应用-软件卸载-找到VMware删除（亲测这样删的最干净），你会发现网络适配器vmnet1和vmnet8都没了，服务程序也自动删除了。<br><strong>备用方法</strong><br>如果首选方法失效，你多半是手动删除了VMware本地文件夹或者用的第三方删除软件。重新安装的版本与删除版本不一致会报错vmx86.sys版本不一致。那么你就要一步一步排查哪部分没卸载干净：<br>服务程序、网络适配器vmnet1和vmnet8、C:\Windows\System32找到vmx86.sys、regedit（注册表）VMware.inc、C盘里programData的VMware文件、programx86里VMware（需要打开显示隐藏文件选项）。注意删除前要先手动停止服务程序，停止运行的相关进程。</p><h3 id="重装"><a href="#重装" class="headerlink" title="重装"></a>重装</h3><p><strong>vmx86.sys版本不一致报错解决方法</strong><br>VMware Authurization Service依赖vmx86.sys，上网查一下会发现VMware Authurization Service是启动虚拟机的时候检验用户身份的服务，而vmx86是启动虚拟机的驱动程序。<br>删除虚拟机的时候没删除干净，把vmx.86的注册表regedit文件漏掉了，导致就算重新安装VMware，这个驱动还是按注册表的版本下载安装。<br>先到C:\Windows\System32找到vmx86.sys删了它本体，注意先关闭相关的服务和进程。<br>，左上角直接搜vmx.86，当然你也可以直接到计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services这个目录下找，速度差不多。找到直接删除，再重新安装VMware。我的问题就全部解决了。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 虚拟机 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 虚拟机 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Hello My Friends!</title>
       <link href="/2023/09/12/Hello-My-Friends/"/>
       <url>/2023/09/12/Hello-My-Friends/</url>
@@ -84,6 +59,31 @@
         <tags>
             
             <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>一些关于VMware的知识点</title>
+      <link href="/2023/09/12/aboutVMware/"/>
+      <url>/2023/09/12/aboutVMware/</url>
+      
+        <content type="html"><![CDATA[<p>VMware全名VMware Workstation，是一款基于x86的虚拟机软件，支持Windows、Mac OS X和Linux操作系统，支持虚拟机的创建、配置、管理和使用。<a href="https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html">VMware官网</a><br>另外一款在市场上份额较大的的是Oracle VM VirtualBox，他们使用的系统光盘映像文件不同，但是可以互相转换。<br>博主我主要使用的是VMware Workstation Pro 16这个版本，所以分享内容也以这个版本为主。</p><h2 id="关于VMware虚拟机的一些常见问题"><a href="#关于VMware虚拟机的一些常见问题" class="headerlink" title="关于VMware虚拟机的一些常见问题"></a>关于VMware虚拟机的一些常见问题</h2><h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><p><strong>问题描述</strong><br>在VMware虚拟机中安装Ubuntu系统，安装完后开机，提示没有权限打开VMware Authorization Service，提示权限不足。<br><strong>解决方法</strong><br>先本地计算机-管理-服务-找到同名的服务选项，手动启动一下，如果还是报错，就管理员权限打开VMware。</p><h2 id="关于重装或者删除VMware的一些坑"><a href="#关于重装或者删除VMware的一些坑" class="headerlink" title="关于重装或者删除VMware的一些坑"></a>关于重装或者删除VMware的一些坑</h2><p><strong>前置知识：</strong></p><ul><li>调出注册表：win+R调出面板，输入regedit</li><li>查看服务程序：</li></ul><ol><li>打开运行(win+R) 窗口, 输入命令services.msc，回车确定</li><li>右键点击桌面上的“此电脑”图标，在弹出菜单中选择“管理”菜单项，在打开的计算机管理窗口中，点击左侧边栏的“服务和应用程序&#x2F;服务”菜单项。</li></ol><ul><li>查看网络适配器：右键点击桌面上的“此电脑”图标，在弹出菜单中选择“管理”菜单项，在打开的计算机管理窗口中，点击“设备管理器”，可以看到网络适配器选项，再点击展开查看。</li></ul><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p><strong>首选方法</strong><br>Windows用户，直接在设置-应用-软件卸载-找到VMware删除（亲测这样删的最干净），你会发现网络适配器vmnet1和vmnet8都没了，服务程序也自动删除了。<br><strong>备用方法</strong><br>如果首选方法失效，你多半是手动删除了VMware本地文件夹或者用的第三方删除软件。重新安装的版本与删除版本不一致会报错vmx86.sys版本不一致。那么你就要一步一步排查哪部分没卸载干净：<br>服务程序、网络适配器vmnet1和vmnet8、C:\Windows\System32找到vmx86.sys、regedit（注册表）VMware.inc、C盘里programData的VMware文件、programx86里VMware（需要打开显示隐藏文件选项）。注意删除前要先手动停止服务程序，停止运行的相关进程。</p><h3 id="重装"><a href="#重装" class="headerlink" title="重装"></a>重装</h3><p><strong>vmx86.sys版本不一致报错解决方法</strong><br>VMware Authurization Service依赖vmx86.sys，上网查一下会发现VMware Authurization Service是启动虚拟机的时候检验用户身份的服务，而vmx86是启动虚拟机的驱动程序。<br>删除虚拟机的时候没删除干净，把vmx.86的注册表regedit文件漏掉了，导致就算重新安装VMware，这个驱动还是按注册表的版本下载安装。<br>先到C:\Windows\System32找到vmx86.sys删了它本体，注意先关闭相关的服务和进程。<br>，左上角直接搜vmx.86，当然你也可以直接到计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services这个目录下找，速度差不多。找到直接删除，再重新安装VMware。我的问题就全部解决了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 虚拟机 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 虚拟机 </tag>
             
         </tags>
       
